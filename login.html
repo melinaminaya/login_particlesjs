@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Arko BI</title>
+    <style>
+        body {
+            background-color: black !important;
+            text-align: center!important;
+        }
+
+        .inputlogin {
+            border-color: red;
+            width: 100%;
+            min-width: 0px;
+            outline: transparent solid 2px;
+            outline-offset: 2px;
+            position: relative;
+            appearance: none;
+            transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+            transition-duration: 200ms;
+            font-size: 0.875rem;
+            padding-inline-start: 1rem;
+            padding-inline-end: 1rem;
+            height: 46px;
+            border-radius: 30px;
+            border-width: initial;
+            border-style: initial;
+            border-image: initial;
+            border-color: inherit;
+            background: black;
+            color: white;
+            max-width: 100%;
+        }
+
+        #loginBox {
+            padding: 2px;
+            background: linear-gradient(123.64deg, rgb(0 0 0 / 78%) -22.38%, rgb(0 0 0 / 64%) 70.38%);
+            margin: 5% auto;
+            z-index: 999;
+            width: 50%;
+            border: 2px solid #0e0e0e;
+            border-radius: 30px;
+
+        }
+
+        .input-group {
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            padding: 2px;
+            background: radial-gradient(69.43% 69.43% at 50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(60% 51.57% at 50% 50%, rgb(255, 44, 44) 0%, rgba(88, 44, 255, 0) 100%), radial-gradient(54.8% 53% at 50% 50%, rgb(21, 21, 21) 0%, rgba(129, 4, 4, 0) 100%);
+            height: 50px;
+            width: 70%;
+            border-radius: 20px;
+            margin: auto 30% 24px 30%;
+        }
+
+        #perfilbody {
+            border-radius: 30px;
+            background: black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: linear-gradient(123.64deg, rgba(0, 0, 0, 0) -22.38%, rgba(0, 0, 0, 0.04) 70.38%);
+
+        }
+
+        .btpadrao {
+            color: #ffffff;
+            background-color: #232222;
+            font-size: 13px;
+            border: 1px solid #232222;
+            padding: 7px 15px;
+            border-radius: 30px;
+            width: 100%;
+            margin: 40%;
+
+        }
+
+        .btpadrao:hover,
+        .btpadrao:focus {
+            color: #fa0000;
+            background-color: #232222;
+            border: 1px solid #232222;
+            outline: none;
+        }
+
+        .link-prop {
+            text-decoration: none;
+            color: white;
+
+        }
+
+        .link-prop:hover,
+        .link-prop:focus {
+            color: red;
+            outline: none;
+            text-decoration: none;
+
+        }
+
+        .loginspan {
+            color: #eee;
+            font-size: 14px;
+        }
+
+        .eyebtn {
+            margin-top: -2.2em;
+            z-index: 99;
+            margin-left: 70% !important;
+        }
+
+        .reportBtn {
+            position: fixed;
+            bottom: 5%;
+            /* background-color:#a6a6a6; */
+            width: 40px;
+            height: 40px;
+            z-index: 9999;
+            opacity: 0;
+            /* box-shadow:2px 2px 2px 0px #2e2e2e; */
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 20px;
+            /* background-image:url('../img/wpak-lady-bug-light.svg'); */
+            display: block;
+            right: 40px;
+            opacity: 0.9;
+            cursor: pointer;
+        }
+
+        .reportWpp {
+            color: white;
+        }
+
+        .reportWpp:hover {
+            color: red;
+        }
+
+        .imgdiv {
+            background-image: url(/vision-ui-dashboard-chakra/static/media/signUpImage.ce32c576.png);
+            width: 100%;
+            height: 1300px;
+            background-size: cover;
+            background-position: 50% center;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+        }
+
+        canvas {
+            display: block;
+            vertical-align: bottom;
+        }
+
+        /* ---- particles.js container ---- */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+            z-index: -1;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
+        .field-2-label {
+            color: white;
+        }
+
+        @media screen and (max-width: 600px) {
+            #loginBox {
+                margin: 10% 0;
+                width: 100%;
+            }
+
+            #togglePassword {
+                margin-top: 7%;
+            }
+        }
+        
+        .fade.in {
+            opacity: 1;
+            background: #ffffff63;
+            transition: opacity .30s linear;
+        }
+
+        .modal .fade {
+            opacity: 5;
+            transition: opacity 5s linear !important;
+        }
+
+        .tab-pane.fade.in {
+            background: #ffffff00 !important;
+        }
+
+        .modal-content {
+            background-color: #1d1c1c !important;
+            color: white;
+            display: block;
+        }
+        .span-intelligence{
+            font-family:  'Arial Narrow';
+            color: grey;
+            font-size: 18px;
+        }
+        .img-arko{
+            width: 15%;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="particles-js"></div>
+    <form action="" method="post" autocomplete="off">
+        <div class="panel" id="loginBox">
+            <div class="panel-body text-center align-content-center" id="perfilbody">
+
+                <h3 class="mt-2" style="color: white;">Cadastre-se</h3>
+                <br>
+
+
+                <div class="input-group mt-2">
+                    <input type="text" placeholder="Nome" id="field-2" class="inputlogin">
+                </div>
+
+
+                <div class="input-group mt-2">
+                    <input type="text" placeholder="Sobrenome" id="field-3" class="inputlogin">
+                </div>
+
+
+                <div class="input-group mt-2">
+                    <input type="password" placeholder="Senha" id="id_password" class="inputlogin" autocomplete="off" require style="    border-top-right-radius: 30px;
+                        border-bottom-right-radius: 30px;">
+                    <div class="eyebtn">
+                        <i class="far fa-eye" id="togglePassword" style=" cursor: pointer; color: #575656; z-index: 99;"></i>
+                    </div>
+                </div>
+
+                <button type="button" id="enviar" class="btpadrao mt-2 mb-2">Enviar</button>
+
+                <span class="loginspan mb-2">Já possui uma conta?<a href="#" id="myBtnmodal" class="link-prop mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal"> Entre
+                        aqui.</a> </span>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+                                <h4 class="modal-title" id="exampleModalLabel">Login</h4>
+
+                                <div class="input-group mt-2" id="userBox" style=" margin: auto;height: auto; width: 80%;">
+                                    <input type="text" class="inputlogin" id="user" name="user" placeholder="e-mail" value="" style="height:38px; font-size:12px;">
+                                </div>
+                                <div class="input-group mt-2" id="senhaBox" style=" margin: auto;height: auto; width: 80%;">
+                                    <input type="password" class="inputlogin" id="psw" name="psw" placeholder="Senha" value="" style="height:38px; font-size:12px;">
+                                </div>
+                                <button type="button" class="btpadrao mt-2 mb-2" style="width: fit-content;">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reportBtn" data-bs-toggle="modal" data-bs-target="#exampleModalReport">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="red" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+                    </svg>
+                </div>
+                <div class="modal fade" id="exampleModalReport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="left: -8%;">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width: max-content;">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title" style="margin-left: 40%;" id="exampleModalLabel">Fale Conosco</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <form id="align-form">
+                                            <div class="form-group" style=" width: 90%; margin: auto;">
+                                                <h4>Encontrou um erro?</h4>
+                                                <textarea name="erro" id="" cols="30" rows="5" class="inputlogin" placeholder="Relate o erro encontrado..." style="border-radius: 4px;height: auto;"></textarea>
+                                                <button type="button" id="erroBtn" class="btpadrao mt-2" style="width: fit-content;">Enviar</button>
+                                            </div>
+                                            <div class="form-group"> </div>
+                                        </form>
+                                    </div>
+                                    <div class="col">
+
+                                        <a href="https://wa.me/5561981266425?text=Olá, encontrei um erro na página Proposições." title="Share on whatsapp" class="reportWpp"> <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="maroon" class="bi bi-whatsapp" style="margin-top: 50px;" viewBox="0 0 16 16">
+                                                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
+                                            </svg>
+                                            <h4>Ou fale com um de nossos especialistas</h4>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    const togglePassword = document.querySelector('#togglePassword');
+                    const password = document.querySelector('#id_password');
+
+                    togglePassword.addEventListener('click', function(e) {
+                        // toggle the type attribute
+                        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                        password.setAttribute('type', type);
+                        // toggle the eye slash icon
+                        this.classList.toggle('fa-eye-slash');
+                    });
+                </script>
+            </div>
+        </div>
+    </form>
+
+    <span class="span-intelligence">Intelligence by</span>
+                </br>
+    <img class="img-arko" src="Images/Logo_Arko_2015_branco_P_trans.png" alt="">
+
+    <script type="text/javascript" src="JS/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 400,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#e40b0b"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 10
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.1,
+                        "opacity_min": 0.2,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 1,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "size_min": 0.5,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#e40b0b",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "bubble"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 300,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 5
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+
+        /* ---- stats.js config ---- */
+
+        var count_particles, stats, update;
+        stats = new Stats;
+        stats.setMode(0);
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+        document.body.appendChild(stats.domElement);
+        count_particles = document.querySelector('.js-count-particles');
+        update = function() {
+            stats.begin();
+            stats.end();
+            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+            }
+            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+    </script>
+
+
+</body>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+</html>
